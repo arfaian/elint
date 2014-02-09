@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Elint</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<%= html_tag :class => "no-js" %>
+  <%= render "head" %>
 
-<%= yield %>
+  <body class="<%= controller.controller_name %>">
+    <%= render "chromeframe" %>
+    <%= render "header" %>
+    <%= render "flashes" %>
 
-</body>
+    <%= yield %>
+
+    <%= render "footer" %>
+
+    <%# Javascript at the bottom for fast page loading %>
+    <%= render "javascripts" %>
+  </body>
 </html>
