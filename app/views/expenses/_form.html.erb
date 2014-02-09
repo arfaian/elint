@@ -1,0 +1,19 @@
+<%= simple_form_for @expense, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <% if notification = f.error_notification %>
+    <div class="alert alert-error fade in">
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+      <%= notification %>
+    </div>
+  <% end %>
+
+  <legend>expense</legend>
+  <%= f.input :description, :input_html => { :class => "form-control span6" } %>
+
+  <%= f.input :date, as: :date, start_year: Date.today.year,
+                              end_year: Date.today.year,
+                              order: [:day, :month, :year] %>
+
+  <%= f.input :avoidable, :as => :boolean %>
+
+<% end %>

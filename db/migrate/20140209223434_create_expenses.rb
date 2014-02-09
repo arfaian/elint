@@ -1,0 +1,13 @@
+class CreateExpenses < ActiveRecord::Migration
+  def change
+    create_table :expenses do |t|
+      t.string :description
+      t.string :note
+      t.date :date
+      t.boolean :avoidable
+      t.integer :cost
+
+      t.timestamps
+    end
+  end
+end
