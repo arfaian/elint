@@ -17,6 +17,7 @@ gem 'compass-h5bp'
 gem 'html5-rails'
 gem 'acts-as-taggable-on'
 gem 'simple_form'
+gem 'draper', '~> 1.3'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
