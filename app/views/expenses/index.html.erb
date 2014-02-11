@@ -1,0 +1,20 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>date</th>
+      <th>merchant</th>
+      <th>cost</th>
+      <th>category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @expenses.each do |expense| %>
+    <tr>
+      <td><%= expense.date %></td>
+      <td><%= expense.merchant %></td>
+      <td><%= expense.cost %></td>
+      <td><%= expense.category %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

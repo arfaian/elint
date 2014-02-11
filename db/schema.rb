@@ -14,6 +14,8 @@
 ActiveRecord::Schema.define(version: 20140209223434) do
 
   create_table "expenses", force: true do |t|
+    t.string   "merchant"
+    t.string   "category"
     t.string   "description"
     t.string   "note"
     t.date     "date"

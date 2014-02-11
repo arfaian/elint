@@ -8,6 +8,8 @@ Elint::Application.routes.draw do
 
   resources :expenses
 
+  get 'expenses/tagged/:tag' => 'expenses#tagged', as: :expenses_tagged
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

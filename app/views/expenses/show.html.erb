@@ -1,5 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <%= @expense.description %>
+    <% @expense.tags.any? %>
+      <% @expense.tags.each do |tag| %>
+      <%= link_to tag.name, expenses_tagged_path(:tag => tag.name) %>
+    <% end %>
   </div>
 </div>

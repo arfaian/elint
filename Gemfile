@@ -18,6 +18,7 @@ gem 'html5-rails'
 gem 'acts-as-taggable-on'
 gem 'simple_form'
 gem 'draper', '~> 1.3'
+gem 'classy_enum', '~>3.3.2'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
