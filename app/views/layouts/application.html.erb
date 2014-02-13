@@ -5,17 +5,19 @@
   <body class="<%= controller.controller_name %>">
     <%= render "chromeframe" %>
     <%= render "header" %>
-    <%= render "flashes" %>
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-12 col-md-12">
+        <%= render "sidebar" %>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <%= render "flashes" %>
           <%= yield %>
         </div>
       </div>
     </div>
 
-    <%= render "footer" %>
+
+    <%# render "footer" %>
 
     <%# Javascript at the bottom for fast page loading %>
     <%= render "javascripts" %>

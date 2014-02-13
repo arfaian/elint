@@ -1,6 +1,5 @@
 class SimpleForm::Inputs::DatepickerInput < SimpleForm::Inputs::StringInput
   def input
-    input_html_options[:type] = "date"
     template.content_tag(:div, super, id: "datepicker")
   end
 end

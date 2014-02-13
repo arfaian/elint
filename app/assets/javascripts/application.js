@@ -15,5 +15,6 @@
 //= require h5bp
 //= require turbolinks
 //= require moment
+//= require bootstrap
 //= require bootstrap-datetimepicker
 

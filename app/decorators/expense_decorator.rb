@@ -8,6 +8,10 @@ class ExpenseDecorator < Draper::Decorator
     object.merchant
   end
 
+  def description
+    object.description
+  end
+
   def category
     object.category
   end
