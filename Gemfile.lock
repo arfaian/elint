@@ -31,6 +31,8 @@ GEM
     atomic (1.1.14)
     bootstrap-sass (3.1.0.2)
       sass (~> 3.2)
+    bootstrap3-datetimepicker-rails (2.1.30)
+      momentjs-rails (~> 2.5.0)
     builder (3.1.4)
     chunky_png (1.2.9)
     classy_enum (3.3.2)
@@ -76,6 +78,8 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (4.7.5)
+    momentjs-rails (2.5.1)
+      railties (>= 3.1)
     multi_json (1.8.4)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -139,6 +143,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on
   bootstrap-sass (~> 3.1.0)
+  bootstrap3-datetimepicker-rails (~> 2.1.30)
   classy_enum (~> 3.3.2)
   coffee-rails (~> 4.0.0)
   compass-h5bp
@@ -147,6 +152,7 @@ DEPENDENCIES
   html5-rails
   jbuilder (~> 1.2)
   jquery-rails
+  momentjs-rails (~> 2.5.0)
   rails (= 4.0.2)
   sass-rails (~> 4.0.0)
   sdoc
