@@ -6,6 +6,7 @@ class ExpensesController < ApplicationController
   end
 
   def show
+    @expense = decorate(@expense)
   end
 
   def new

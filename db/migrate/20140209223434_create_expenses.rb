@@ -7,7 +7,7 @@ class CreateExpenses < ActiveRecord::Migration
       t.string :note
       t.date :date
       t.boolean :avoidable
-      t.integer :cost
+      t.money :cost
 
       t.timestamps
     end

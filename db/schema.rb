@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(version: 20140209223434) do
     t.string   "note"
     t.date     "date"
     t.boolean  "avoidable"
-    t.integer  "cost"
+    t.integer  "cost_cents",    default: 0,     null: false
+    t.string   "cost_currency", default: "USD", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
