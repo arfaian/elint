@@ -1,11 +1,11 @@
-class ExpenseDecorator < Draper::Decorator
+class TransactionDecorator < Draper::Decorator
   delegate_all
 
   def date
     object.date.strftime("%m/%d/%Y")
   end
 
-  def cost
-    "$#{object.cost}"
+  def sum
+    "$#{object.sum}"
   end
 end

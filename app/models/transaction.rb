@@ -1,9 +1,10 @@
-class Expense < ActiveRecord::Base
+class Transaction < ActiveRecord::Base
   after_initialize :after_initialize
-  validates_presence_of :cost, :merchant, :date
+  validates_presence_of :sum, :merchant, :date
   belongs_to :user
   acts_as_taggable
-  monetize :cost_cents
+  classy_enum_attr :transaction_type
+  monetize :sum_cents
 
   scope :current_month, -> { where("date > ? AND date < ?",
       Date.today.beginning_of_month, Date.today.end_of_month) }

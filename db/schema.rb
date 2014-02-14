@@ -11,22 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214015118) do
-
-  create_table "expenses", force: true do |t|
-    t.string   "merchant"
-    t.string   "category"
-    t.text     "note"
-    t.date     "date"
-    t.boolean  "avoidable"
-    t.integer  "cost_cents",    default: 0,     null: false
-    t.string   "cost_currency", default: "USD", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  add_index "expenses", ["user_id"], name: "index_expenses_on_user_id"
+ActiveRecord::Schema.define(version: 20140214045849) do
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -45,6 +30,22 @@ ActiveRecord::Schema.define(version: 20140214015118) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+
+  create_table "transactions", force: true do |t|
+    t.string   "merchant"
+    t.string   "category"
+    t.text     "note"
+    t.date     "date"
+    t.boolean  "avoidable"
+    t.integer  "sum_cents",        default: 0,     null: false
+    t.string   "cost_currency",    default: "USD", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "transaction_type"
+  end
+
+  add_index "transactions", ["user_id"], name: "index_transactions_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

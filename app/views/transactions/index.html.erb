@@ -31,20 +31,20 @@
       <tr>
         <th>date</th>
         <th>merchant</th>
-        <th>cost</th>
+        <th>sum</th>
         <th>category</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <% @expenses.each do |expense| %>
+      <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= expense.date %></td>
-        <td><%= expense.merchant %></td>
-        <td><%= expense.cost %></td>
-        <td><%= expense.category %></td>
+        <td><%= transaction.date %></td>
+        <td><%= transaction.merchant %></td>
+        <td><%= transaction.sum %></td>
+        <td><%= transaction.category %></td>
         <td class="text-right">
-          <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_expense_path(expense) %>
+          <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_transaction_path(transaction) %>
         </td>
       </tr>
       <% end %>
@@ -53,5 +53,5 @@
 </div>
 
 <% content_for :javascripts do %>
-  <%= javascript_include_tag 'expenses_index' %>
+  <%= javascript_include_tag 'transactions_index' %>
 <% end %>

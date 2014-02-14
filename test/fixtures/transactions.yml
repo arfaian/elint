@@ -4,10 +4,10 @@ one:
   note: MyString
   date: 2014-02-09
   avoidable: false
-  cost: 1
+  sum: 1
 
 two:
   note: MyString
   date: 2014-02-09
   avoidable: false
-  cost: 1
+  sum: 1

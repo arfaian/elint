@@ -1,4 +1,4 @@
-<%= simple_form_for @expense, wrapper: :bootstrap3_horizontal,
+<%= simple_form_for @transaction, wrapper: :bootstrap3_horizontal,
   defaults: { right_column_html: { class: "col-lg-6 col-md-6"},
   label_html: { class: "col-lg-2 col-md-2" } },
   html: { class: "form-horizontal", role: "form" } do |f| %>
@@ -10,14 +10,14 @@
     </div>
   <% end %>
 
-  <legend>expense</legend>
+  <legend>transaction</legend>
 
   <%= f.input :merchant %>
 
   <%= f.input :date, as: :datepicker,
       input_html: { "data-format" => "YYYY/MM/DD" } %>
 
-  <%= f.input :cost,
+  <%= f.input :sum,
       input_html: { type: "number", min: "0.01", step: "0.01", max: "2500" } %>
 
   <%= f.input :note %>
@@ -27,14 +27,14 @@
   <%= f.input :tag_list %>
 
   <%= f.button :submit, class: 'btn btn-primary' %>
-  <%= link_to 'cancel', expenses_path, class: "btn btn-danger" %>
+  <%= link_to 'cancel', transactions_path, class: "btn btn-danger" %>
 
 <% end %>
 
 <% content_for :javascripts do %>
   <script type="text/javascript">
     $(function () {
-      $('#expense_date').datetimepicker({
+      $('#transaction_date').datetimepicker({
          pickTime: false
       });
     });
