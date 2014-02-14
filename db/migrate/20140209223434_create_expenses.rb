@@ -3,8 +3,7 @@ class CreateExpenses < ActiveRecord::Migration
     create_table :expenses do |t|
       t.string :merchant
       t.string :category
-      t.string :description
-      t.string :note
+      t.text :note
       t.date :date
       t.boolean :avoidable
       t.money :cost

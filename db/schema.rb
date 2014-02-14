@@ -11,20 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209223434) do
+ActiveRecord::Schema.define(version: 20140214015118) do
 
   create_table "expenses", force: true do |t|
     t.string   "merchant"
     t.string   "category"
-    t.string   "description"
-    t.string   "note"
+    t.text     "note"
     t.date     "date"
     t.boolean  "avoidable"
     t.integer  "cost_cents",    default: 0,     null: false
     t.string   "cost_currency", default: "USD", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "expenses", ["user_id"], name: "index_expenses_on_user_id"
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -43,5 +45,25 @@ ActiveRecord::Schema.define(version: 20140209223434) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "role"
+    t.date     "partition_start_date"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

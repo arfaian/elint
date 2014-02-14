@@ -1,14 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  description: MyString
   note: MyString
   date: 2014-02-09
   avoidable: false
   cost: 1
 
 two:
-  description: MyString
   note: MyString
   date: 2014-02-09
   avoidable: false
