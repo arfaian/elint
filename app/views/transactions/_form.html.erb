@@ -20,6 +20,10 @@
   <%= f.input :sum,
       input_html: { type: "number", min: "0.01", step: "0.01", max: "2500" } %>
 
+  <%= f.input :transaction_type, as: :select,
+      collection: TransactionType.select_options,
+      selected: @transaction.transaction_type.to_s %>
+
   <%= f.input :note %>
 
   <%= f.input :avoidable, :as => :boolean, boolean_style: :inline %>

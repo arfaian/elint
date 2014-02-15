@@ -22,9 +22,21 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def saved
-    API::Transactions.new.saved(current_user)
-    current_user.transactions.current_month.select(&:cost)
+  def type
+    type = params[:type] if %w{credits debits}.include?(params[:type])
+    if type.nil?
+      head :not_found
+      return
+    end
+    transactions = decorate(current_user.transactions.send(type.to_sym))
+    transactions = TransactionDecorator.decorate_collection(transactions)
+    respond_to do |format|
+      format.json {
+        json = {}
+        json[type] = transactions.as_json
+        render json: json.to_json
+      }
+    end
   end
 
   def create

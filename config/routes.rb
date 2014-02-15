@@ -10,6 +10,7 @@ Elint::Application.routes.draw do
   resources :transactions
 
   get 'transactions/tagged/:tag' => 'transactions#tagged', as: :transactions_tagged
+  get 'transactions/type/:type' => 'transactions#type', as: :transactions_type
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
