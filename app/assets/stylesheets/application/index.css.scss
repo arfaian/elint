@@ -38,6 +38,7 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
+  font-weight: 200
 }
 
 
@@ -123,4 +124,12 @@ body {
 }
 .placeholder img {
   border-radius: 50%;
+}
+
+.sub-header {
+  font-weight: 200
+}
+
+.table th {
+  font-weight: 500
 }

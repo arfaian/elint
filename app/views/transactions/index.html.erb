@@ -1,9 +1,28 @@
+<% content_for :head do %>
+  <style>
+
+    text {
+      font: 200 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+  </style>
+<% end %>
+
 <% content_for :javascripts do %>
   <%= javascript_include_tag 'vendor/d3.v3' %>
+  <%= javascript_include_tag 'vendor/underscore' %>
+  <%= javascript_include_tag 'transactions_index' %>
 <% end %>
+
+<h2 class="sub-header">
+  <% beginning_of_month = Date.today.beginning_of_month.strftime('%-m/%-d/%Y') %>
+  <% end_of_month = Date.today.end_of_month.strftime('%-m/%-d/%Y') %>
+  <%= "#{beginning_of_month} - #{end_of_month}" %>
+</h2>
 <div class="row placeholders">
   <div class="col-xs-6 col-sm-3 placeholder">
-    <div class="img-responsive income-percent"></div>
+    <svg id="chart-saved-spent" viewBox="0 0 200 200"
+      preserveAspectRatio="xMidYMid">
+    </svg>
     <h4>Label</h4>
     <span class="text-muted">Something else</span>
   </div>
@@ -24,7 +43,7 @@
   </div>
 </div>
 
-<h2 class="sub-header">Section title</h2>
+<h2 class="sub-header">transactions</h2>
 <div class="table-responsive">
   <table class="table table-striped table-hover">
     <thead>
@@ -33,6 +52,7 @@
         <th>merchant</th>
         <th>sum</th>
         <th>category</th>
+        <th>recurring?</th>
         <th></th>
       </tr>
     </thead>
@@ -43,6 +63,11 @@
         <td><%= transaction.merchant %></td>
         <td><%= transaction.sum %></td>
         <td><%= transaction.category %></td>
+        <td>
+          <% if transaction.recurring %>
+            <span class="glyphicon glyphicon-ok"></span>
+          <% end %>
+        </td>
         <td class="text-right">
           <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_transaction_path(transaction) %>
         </td>
@@ -51,7 +76,3 @@
     </tbody>
   </table>
 </div>
-
-<% content_for :javascripts do %>
-  <%= javascript_include_tag 'transactions_index' %>
-<% end %>

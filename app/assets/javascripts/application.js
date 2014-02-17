@@ -17,4 +17,4 @@
 //= require moment
 //= require bootstrap
 //= require bootstrap-datetimepicker
-
+$(function () { $("[data-toggle='tooltip']").tooltip(); });

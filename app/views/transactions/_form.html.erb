@@ -28,6 +28,13 @@
 
   <%= f.input :avoidable, :as => :boolean, boolean_style: :inline %>
 
+  <%= f.input :recurring, :as => :boolean, boolean_style: :inline %>
+
+  <div class="recurring-transaction hide">
+    <%= f.input :recurrence_interval, disabled: true, as: :select,
+      collection: RecurrenceInterval.select_options %>
+  </div>
+
   <%= f.input :tag_list %>
 
   <%= f.button :submit, class: 'btn btn-primary' %>
@@ -40,6 +47,17 @@
     $(function () {
       $('#transaction_date').datetimepicker({
          pickTime: false
+      });
+
+      $('#transaction_recurring').change(function() {
+        $('.recurring-transaction')
+          .toggleClass('hide')
+          .find('div')
+          .toggleClass('disabled')
+          .find('select')
+          .prop('disabled', function (_, val) {
+            return !val;
+          });
       });
     });
   </script>

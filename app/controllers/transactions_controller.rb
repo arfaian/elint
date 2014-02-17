@@ -3,7 +3,8 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   def index
-    @transactions = decorate(current_user.transactions)
+    transactions = current_user.transactions.current_month.order(:date).to_a
+    @transactions = decorate(transactions)
   end
 
   def show

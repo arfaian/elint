@@ -23,6 +23,8 @@ gem 'momentjs-rails', '~> 2.5.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 2.1.30'
 gem 'money-rails', '~> 0.9.0'
 gem 'devise', '~> 3.2.2'
+gem 'unicorn', '~> 4.8.2'
+gem 'sucker_punch', '~> 1.0.2'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
