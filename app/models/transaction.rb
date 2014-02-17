@@ -7,7 +7,7 @@ class Transaction < ActiveRecord::Base
   validates_presence_of :amount, :merchant, :date
   validates :recurrence_interval, presence: true, if: :recurring?
   belongs_to :user
-  acts_as_taggable
+  acts_as_taggable_on :tags, :categories
   classy_enum_attr :transaction_type, default: 'debit'
   classy_enum_attr :recurrence_interval, allow_nil: true
   monetize :amount_cents

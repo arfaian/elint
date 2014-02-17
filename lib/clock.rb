@@ -7,5 +7,5 @@ module Clockwork
     puts "Running #{job}"
   end
 
-  every(1.day, 'recurring.transactions.job', :at => '06:00') { RecurringTransactionsJob.new.perform }
+  every(1.day, 'recurring.transactions.job', at: '06:00') { RecurringTransactionsJob.new.perform }
 end

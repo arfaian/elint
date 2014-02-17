@@ -5,15 +5,34 @@
       <dd><%= @transaction.merchant %></dd>
       <dt>date</dt>
       <dd><%= @transaction.date %></dd>
+      <dt>type</dt>
+      <dd><%= @transaction.transaction_type %></dd>
       <dt>amount</dt>
       <dd><%= @transaction.amount %></dd>
+      <% if @transaction.categories.any? %>
+        <dt>categories</dt>
+        <dd>
+          <% @transaction.categories.each do |cat| %>
+            <span class="col-md-2">
+              <%= link_to cat.name, transactions_tagged_path(tag: cat.name) %>
+            </span>
+          <% end %>
+        </dd>
+      <% end %>
       <dt>note</dt>
       <dd><%= @transaction.note %></dd>
-      <% @transaction.tags.any? %>
+      <dt>avoidable?</dt>
+      <dd><%= @transaction.avoidable %></dd>
+      <dt>recurring?</dt>
+      <dd><%= @transaction.recurring %></dd>
+      <% if @transaction.tags.any? %>
         <dt>tags</dt>
         <dd>
-        <% @transaction.tags.each do |tag| %>
-        <span class="col-md-2"><%= link_to tag.name, transactions_tagged_path(:tag => tag.name) %></span>
+          <% @transaction.tags.each do |tag| %>
+            <span class="col-md-2">
+              <%= link_to tag.name, transactions_tagged_path(tag: tag.name) %>
+            </span>
+          <% end %>
         </dd>
       <% end %>
     </dl>

@@ -41,9 +41,18 @@
   </div>
 </div>
 
-<h2 class="sub-header">transactions</h2>
+<h2 class="sub-header">
+  transactions
+  <span class="pull-right">
+    <%= link_to new_transaction_path do %>
+      <button type="button" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    <% end %>
+  </span>
+</h2>
 <div class="table-responsive">
-  <table class="table table-striped table-hover">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>date</th>
@@ -59,15 +68,31 @@
       <tr>
         <td><%= transaction.date %></td>
         <td><%= transaction.merchant %></td>
-        <td><%= transaction.amount %></td>
-        <td><%= transaction.category %></td>
+        <td>
+          <% t = transaction.transaction_type %>
+          <span class="<%= "#{t}" %>">
+            <%= t == :credit ? "+" : "-" %>
+          </span>
+          <%= transaction.amount %>
+        </td>
+        <td>
+          <% transaction.categories.each do |category| %>
+            <span>
+              <%= link_to category.name, transactions_tagged_path(tag: category.name) %>
+            </span>
+          <% end %>
+        </td>
         <td>
           <% if transaction.recurring %>
             <span class="glyphicon glyphicon-ok"></span>
           <% end %>
         </td>
         <td class="text-right">
-          <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_transaction_path(transaction) %>
+          <%= link_to edit_transaction_path(transaction) do %>
+            <button type="button" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          <% end %>
         </td>
       </tr>
       <% end %>

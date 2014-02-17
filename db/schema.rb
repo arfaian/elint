@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217180923) do
+ActiveRecord::Schema.define(version: 20140217212340) do
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20140217180923) do
 
   create_table "transactions", force: true do |t|
     t.string   "merchant"
-    t.string   "category"
     t.text     "note"
     t.date     "date"
     t.boolean  "avoidable"

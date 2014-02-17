@@ -4,7 +4,7 @@
       radius = Math.min(width, height) / 2;
 
   var color = d3.scale.ordinal()
-      .range(["#0D8FDB", "#39DBAC", "#F8591A", "#3a5a97", "#434A52"]);
+      .range(["#39DBAC", "#F8591A", "#0D8FDB", "#3a5a97", "#434A52"]);
 
   var arc = d3.svg.arc()
       .outerRadius(radius - 10)
@@ -28,12 +28,12 @@
     chartSvg.attr("height", Math.min(200, targetWidth));
   });
 
-  var pattern = /[^0-9.-]+/g;
+  var pattern = /[\d\.\d]+/g;
 
   d3.json("transactions.json", function(error, data) {
 
     data.forEach(function(d) {
-      d.amount = parseFloat(d.amount.replace(pattern, '')) * 100;
+      d.amount = parseFloat(d.amount.match(pattern)) * 100;
     });
 
     var newData = _.groupBy(data, function(d) { return d.transaction_type });
@@ -48,10 +48,11 @@
     });
 
     data.length = 0;
-    var debits = _.findWhere(newArray, { transaction_type: 'credits' });
-    var credits = _.findWhere(newArray, { transaction_type: 'debits' });
+    var debits = _.findWhere(newArray, { transaction_type: 'debits' });
+    var credits = _.findWhere(newArray, { transaction_type: 'credits' });
     var saved = credits.amount - debits.amount;
-    data.push({ transaction_type: 'saved', amount: saved });
+    var chartSaved = saved <= 0 ? 0 : saved;
+    data.push({ transaction_type: 'saved', amount: chartSaved });
     data.push({ transaction_type: 'spent', amount: debits.amount });
 
     var g = svg.selectAll(".arc")

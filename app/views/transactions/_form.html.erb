@@ -17,12 +17,14 @@
   <%= f.input :date, as: :datepicker,
       input_html: { "data-format" => "YYYY/MM/DD" } %>
 
-  <%= f.input :amount,
-      input_html: { type: "number", min: "0.01", step: "0.01", max: "2500" } %>
-
   <%= f.input :transaction_type, as: :select,
       collection: TransactionType.select_options,
       selected: @transaction.transaction_type.to_s %>
+
+  <%= f.input :amount,
+      input_html: { type: "number", min: "0.01", step: "0.01", max: "2500" } %>
+
+  <%= f.input :category_list %>
 
   <%= f.input :note %>
 
