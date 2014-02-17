@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217052807) do
+ActiveRecord::Schema.define(version: 20140217180923) do
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140217052807) do
     t.text     "note"
     t.date     "date"
     t.boolean  "avoidable"
-    t.integer  "sum_cents",           default: 0,     null: false
+    t.integer  "amount_cents",        default: 0,     null: false
     t.string   "cost_currency",       default: "USD", null: false
     t.datetime "created_at"
     t.datetime "updated_at"

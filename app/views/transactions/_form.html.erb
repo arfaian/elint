@@ -17,7 +17,7 @@
   <%= f.input :date, as: :datepicker,
       input_html: { "data-format" => "YYYY/MM/DD" } %>
 
-  <%= f.input :sum,
+  <%= f.input :amount,
       input_html: { type: "number", min: "0.01", step: "0.01", max: "2500" } %>
 
   <%= f.input :transaction_type, as: :select,
