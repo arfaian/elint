@@ -14,9 +14,7 @@
 <% end %>
 
 <h2 class="sub-header">
-  <% beginning_of_month = Date.today.beginning_of_month.strftime('%-m/%-d/%Y') %>
-  <% end_of_month = Date.today.end_of_month.strftime('%-m/%-d/%Y') %>
-  <%= "#{beginning_of_month} - #{end_of_month}" %>
+  <%= Date.today.strftime('%B %Y') %>
 </h2>
 <div class="row placeholders">
   <div class="col-xs-6 col-sm-3 placeholder">
