@@ -19,6 +19,11 @@ class Transaction < ActiveRecord::Base
   scope :avoidable, -> { where avoidable: true }
   scope :recurring_today, -> { where recurrence_date: Date.today }
 
+  def update_tags_and_categories(user)
+    user.tag(self, with: self.tag_list, on: :tags)
+    user.tag(self, with: self.category_list, on: :categories)
+  end
+
   private
     def after_initialize
       self.recurrence_date ||= self.recurrence_interval.date if new_record? && recurring?

@@ -30,7 +30,7 @@
 
   var pattern = /[\d\.\d]+/g;
 
-  d3.json("transactions.json", function(error, data) {
+  d3.json(window.location.pathname + ".json", function(error, data) {
 
     data.forEach(function(d) {
       d.amount = parseFloat(d.amount.match(pattern)) * 100;
@@ -48,9 +48,16 @@
     });
 
     data.length = 0;
-    var debits = _.findWhere(newArray, { transaction_type: 'debits' });
-    var credits = _.findWhere(newArray, { transaction_type: 'credits' });
+    var debits = _.findWhere(newArray, { transaction_type: 'debits' })
+      || { transaction_type: 'debits', amount: 0 };
+    var credits = _.findWhere(newArray, { transaction_type: 'credits' })
+      || { transaction_type: 'credits', amount: 0 };
     var saved = credits.amount - debits.amount;
+
+    if (credits.amount === 0) {
+      saved = (0.0).toFixed(2);
+    }
+
     var chartSaved = saved <= 0 ? 0 : saved;
     data.push({ transaction_type: 'saved', amount: chartSaved });
     data.push({ transaction_type: 'spent', amount: debits.amount });
@@ -81,7 +88,7 @@
           el.text(this.value.toFixed(2));
         },
         complete: function() {
-          el.text(this.value);
+          el.text(this.value.toFixed(2));
         }
       });
     }

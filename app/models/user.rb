@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   classy_enum_attr :role
   has_many :transactions
+  acts_as_tagger
 end

@@ -14,7 +14,7 @@ class TransactionDecorator < Draper::Decorator
   def as_json
     {
       merchant: object.merchant,
-      categories: object.category_list,
+      categories: object.categories,
       date: object.date,
       amount: object.amount.to_s,
       transaction_type: object.transaction_type

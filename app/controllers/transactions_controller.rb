@@ -3,7 +3,8 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   def index
-    transactions = current_user.transactions.current_month.order(:date).to_a
+    transactions = current_user.transactions.current_month
+                      .order(:date).includes(:tags).includes(:categories).to_a
     @transactions = decorate(transactions)
   end
 
@@ -17,6 +18,7 @@ class TransactionsController < ApplicationController
 
   def update
     if @transaction.update(transaction_params)
+      @transaction.update_tags_and_categories(current_user)
       redirect_to @transaction, notice: 'transaction was successfully updated.'
     else
       render action: 'edit'
@@ -44,6 +46,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
 
     if @transaction.save
+      @transaction.update_tags_and_categories(current_user)
       redirect_to @transaction, notice: 'transaction was successfully created.'
     else
       render action: 'new'
