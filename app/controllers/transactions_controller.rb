@@ -65,6 +65,8 @@ class TransactionsController < ApplicationController
   private
     def set_transaction
       @transaction = current_user.transactions.where(id: params[:id]).first
+      redirect_to(transactions_path, notice: 'transaction not found') unless @transaction
+      @transaction
     end
 
     def transaction_params
