@@ -32,10 +32,6 @@
 
   d3.json(window.location.pathname + ".json", function(error, data) {
 
-    if (Object.prototype.toString.call(data) === '[object Object]') {
-      data = _.flatten(_.values(data));
-    }
-
     data.forEach(function(d) {
       d.amount = parseFloat(d.amount.match(pattern)) * 100;
     });

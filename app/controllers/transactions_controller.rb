@@ -5,7 +5,40 @@ class TransactionsController < ApplicationController
   def index
     transactions = current_user.transactions.current_month
                       .order(:date).includes(:tags).includes(:categories).to_a
+    @header = Date.today.strftime('%B %Y')
     @transactions = decorate(transactions)
+  end
+
+  def by_year
+    year = params[:year].to_i
+    @date = Date.new(year)
+    @header = @date.strftime('%Y')
+    transactions = current_user.transactions.by_year(@date)
+    @transactions = decorate(transactions)
+    render :index
+  end
+
+  def by_month
+    year = params[:year].to_i
+    month = params[:month].to_i
+    @date = Date.new(year, month)
+    @header = @date.strftime('%B %Y')
+    transactions = current_user.transactions.by_month(@date)
+    @transactions = decorate(transactions)
+    render :index
+  end
+
+  def by_category
+    categories = params[:categories]
+    transactions = current_user.transactions.by_category(categories)
+    @transactions = decorate(transactions)
+    @header = categories
+    respond_to do |format|
+      format.html { render :index }
+      format.json {
+        @transactions = @transactions.group_by { |t| t.category_list }
+      }
+    end
   end
 
   def show

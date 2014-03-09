@@ -9,6 +9,10 @@ Elint::Application.routes.draw do
 
   resources :transactions
 
+  get 'transactions/date/:year' => 'transactions#by_year', as: :transactions_by_year
+  get 'transactions/date/:year/:month' => 'transactions#by_month', as: :transactions_by_month
+
+  get 'transactions/category/:categories' => 'transactions#by_category', as: :transactions_by_category
   get 'transactions/tagged/:tag' => 'transactions#tagged', as: :transactions_tagged
   get 'transactions/type/:type' => 'transactions#type', as: :transactions_type
 

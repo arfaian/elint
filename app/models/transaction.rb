@@ -13,6 +13,9 @@ class Transaction < ActiveRecord::Base
   monetize :amount_cents
 
   scope :current_month, -> { where(date: Date.today.beginning_of_month..Date.today.end_of_month) }
+  scope :by_year, ->(date) { where(date: date.beginning_of_year..date.end_of_year) }
+  scope :by_month, ->(date) { where(date: date.beginning_of_month..date.end_of_month) }
+  scope :by_category, ->(categories) { tagged_with(categories, on: :categories) }
 
   scope :credits, -> { where transaction_type: :credit }
   scope :debits, -> { where transaction_type: :debit }

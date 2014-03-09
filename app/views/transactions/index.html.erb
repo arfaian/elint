@@ -14,7 +14,7 @@
 <% end %>
 
 <h2 class="sub-header">
-  <%= Date.today.strftime('%B %Y') %>
+  <%= @header %>
 </h2>
 <div class="row placeholders">
   <div class="col-xs-6 col-sm-3 placeholder">
@@ -25,17 +25,9 @@
     <span class="text-muted">Something else</span>
   </div>
   <div class="col-xs-6 col-sm-3 placeholder">
-    <div class="img-responsive income-percent"></div>
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
-  </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <div class="img-responsive income-percent"></div>
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
-  </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <div class="img-responsive income-percent"></div>
+    <svg id="chart-categories" viewBox="0 0 200 200"
+      preserveAspectRatio="xMidYMid" width="200" height="200">
+    </svg>
     <h4>Label</h4>
     <span class="text-muted">Something else</span>
   </div>
