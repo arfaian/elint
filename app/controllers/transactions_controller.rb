@@ -33,12 +33,7 @@ class TransactionsController < ApplicationController
     transactions = current_user.transactions.by_category(categories)
     @transactions = decorate(transactions)
     @header = categories
-    respond_to do |format|
-      format.html { render :index }
-      format.json {
-        @transactions = @transactions.group_by { |t| t.category_list }
-      }
-    end
+    render :index
   end
 
   def show

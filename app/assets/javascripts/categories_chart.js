@@ -14,13 +14,13 @@
       .sort(null)
       .value(function(d) { return d.amount; });
 
-  var svg = d3.select("#chart-saved-spent")
+  var svg = d3.select("#chart-categories")
       .attr("width", width)
       .attr("height", height)
     .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-  var chartSvg = $('#chart-saved-spent');
+  var chartSvg = $('#chart-categories');
 
   $(window).on("resize", function() {
     var targetWidth = chartSvg.parent().width();
@@ -30,37 +30,34 @@
 
   var pattern = /[\d\.\d]+/g;
 
-  d3.json(window.location.pathname + ".json", function(error, data) {
+  drawCategoryChart = function(data) {
 
-    data.forEach(function(d) {
-      d.amount = parseFloat(d.amount.match(pattern)) * 100;
+    data = _.groupBy(data, function(t) {
+      var cat = "uncategorized";
+      if (t.categories.length) {
+        cat = t.categories[0].name
+      }
+      return cat;
     });
 
-    var newData = _.groupBy(data, function(d) { return d.transaction_type });
-
-    var newArray = [];
-    _.each(newData, function(v, k) {
-      var obj = {
-        transaction_type: k + 's',
-        amount: _.reduce(v, function(sum, d) { return sum + d.amount }, 0)
-      };
-      newArray.push(obj);
-    });
-
-    data.length = 0;
-    var debits = _.findWhere(newArray, { transaction_type: 'debits' })
-      || { transaction_type: 'debits', amount: 0 };
-    var credits = _.findWhere(newArray, { transaction_type: 'credits' })
-      || { transaction_type: 'credits', amount: 0 };
-    var saved = credits.amount - debits.amount;
-
-    if (credits.amount === 0) {
-      saved = (0.0).toFixed(2);
+    var sums = [];
+    for (k in data) {
+      var arr = data[k];
+      for (var i = 0; i < arr.length; i++) {
+        var t = arr[i];
+        var el = _.find(sums, function(s) { return s.category === k; })
+        if (el !== undefined) {
+          el.amount += parseFloat(t.amount.match(pattern)) * 100;
+        } else {
+          sums.push({
+            category: k,
+            amount: parseFloat(t.amount.match(pattern)) * 100
+          });
+        }
+      }
     }
 
-    var chartSaved = saved <= 0 ? 0 : saved;
-    data.push({ transaction_type: 'saved', amount: chartSaved });
-    data.push({ transaction_type: 'spent', amount: debits.amount });
+    data = sums;
 
     var g = svg.selectAll(".arc")
         .data(pie(data))
@@ -69,7 +66,7 @@
 
     g.append("path")
         .each(function() { this._current = {startAngle: 0, endAngle: 0}; })
-        .style("fill", function(d) { return color(d.data.transaction_type); })
+        .style("fill", function(d) { return color(d.data.category); })
         .transition()
         .duration(1200)
         .attrTween("d", function(d) {
@@ -93,45 +90,5 @@
       });
     }
 
-    var savedTextBox = svg.append('g')
-      .attr("transform", "translate(7.5, -12)");
-
-    savedTextBox.append("circle")
-        .attr('r', 6)
-        .attr("transform", "translate(-7,0)")
-        .style("fill",  color('saved'));
-
-    savedTextBox.append('text')
-      .attr("dy", ".35em")
-      .attr("transform", "translate(-16,0)")
-      .style("text-anchor", "end")
-      .text('saved');
-
-    var svt = savedTextBox.append('text')
-      .attr("dy", ".35em")
-      .attr("transform", "translate(2,0)")
-      .style("text-anchor", "start");
-
-    var spentTextBox = svg.append('g')
-      .attr("transform", "translate(7.5, 12)")
-
-    spentTextBox.append("circle")
-        .attr('r', 6)
-        .attr("transform", "translate(-7,0)")
-        .style("fill",  color('spent'));
-
-    spentTextBox.append('text')
-      .attr("dy", ".35em")
-      .attr("transform", "translate(-16,0)")
-      .style("text-anchor", "end")
-      .text('spent');
-
-    var spt = spentTextBox.append('text')
-      .attr("dy", ".35em")
-      .attr("transform", "translate(2,0)")
-      .style("text-anchor", "start");
-
-    animateText(svt, saved);
-    animateText(spt, debits.amount);
-  });
+  }
 })();
